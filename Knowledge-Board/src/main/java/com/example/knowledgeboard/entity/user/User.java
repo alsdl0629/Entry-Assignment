@@ -1,15 +1,17 @@
-package com.example.knowledgeboard.entity.member;
+package com.example.knowledgeboard.entity.user;
 
+import com.example.knowledgeboard.entity.board.Board;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Member {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +28,11 @@ public class Member {
 
     @Column(nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
+    @OneToMany(mappedBy = "user")
+    private List<Board> boards;
 
 }
