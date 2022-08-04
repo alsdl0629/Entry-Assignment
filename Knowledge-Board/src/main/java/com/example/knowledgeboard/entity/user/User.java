@@ -24,9 +24,6 @@ public class User {
     private String name;
 
     @Column(nullable = false)
-    private Integer age;
-
-    @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
