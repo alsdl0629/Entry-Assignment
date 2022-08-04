@@ -4,26 +4,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @Getter
 public class SignupRequest {
 
-    @NotNull
-    @Size(max = 20, message = "아이디는 최대 20글자")
+    @NotBlank(message = "account_id는 필수 항목입니다.")
+    @Size(min = 5 ,max = 20, message = "account_id는 5글자 이상, 20글자 이하여야 합니다.")
     @JsonProperty("account_id")
     private String accountId;
 
-    @NotNull
-    @Size(max = 10, message = "이름은 최대 10글자")
+    @NotBlank(message = "name은 필수 항목입니다.")
+    @Size(min = 1, max = 10, message = "name은 10글자 이하여야 합니다.")
     private String name;
 
-    @NotNull
-    private Integer age;
-
-    @NotNull
-    @Size(min = 8, max = 20, message = "비밀번호는 8~20글자")
+    @NotBlank(message = "password는 필수 항목입니다.")
+    @Size(min = 8, max = 20, message = "password는 8글자 이상, 20글자 이하여야 합니다.")
     private String password;
+
 }
