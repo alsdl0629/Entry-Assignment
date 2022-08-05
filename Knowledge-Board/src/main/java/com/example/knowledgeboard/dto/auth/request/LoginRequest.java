@@ -1,23 +1,18 @@
 package com.example.knowledgeboard.dto.auth.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 
-@Getter
 @AllArgsConstructor
+@Getter
 public class LoginRequest {
 
-    @NotNull
-    @Size(max = 20, message = "아이디는 최대 20글자")
-    @JsonProperty("account_id")
+    @NotBlank(message = "account_id는 필수 항목입니다.")
     private String accountId;
 
-    @NotNull
-    @Size(min = 8, max = 20, message = "비밀번호는 8~20글자")
+    @NotBlank(message = "password는 필수 항목입니다.")
     private String password;
 
 }
