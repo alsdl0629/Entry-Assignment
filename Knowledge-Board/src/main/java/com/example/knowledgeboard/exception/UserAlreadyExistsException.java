@@ -5,7 +5,10 @@ import com.example.knowledgeboard.error.ErrorCode;
 
 public class UserAlreadyExistsException extends BusinessException {
 
-    public UserAlreadyExistsException() {
+    public static BusinessException EXCEPTION =
+            new UserAlreadyExistsException();
+
+    private UserAlreadyExistsException() {
         super(ErrorCode.USER_ALREADY_EXISTS);
     }
 
