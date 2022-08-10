@@ -92,4 +92,24 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
+
+    public DetailedFeedResponse getOneFeed(Integer feedId) {
+
+        Board board = boardRepository.findById(feedId)
+                .orElseThrow(() -> FeedNotFoundException.EXCEPTION);
+
+        board.addViews();
+        boardRepository.save(board);
+
+        return DetailedFeedResponse.builder()
+                .boardId(board.getId())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .createdAt(board.getUpdatedAt())
+                .updatedAt(board.getUpdatedAt())
+                .views(board.getViews())
+                .writer(board.getUser().getAccountId())
+                .build();
+    }
+
 }

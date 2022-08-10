@@ -37,9 +37,14 @@ public class BoardController {
         return boardService.deleteFeed(id);
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public List<AllFeedsResponse> getAllFeed() {
         return boardService.getAllFeed();
+    }
+
+    @GetMapping("/{feed_id}")
+    public DetailedFeedResponse getOneFeed(@PathVariable(name = "feed_id") Integer id) {
+        return boardService.getOneFeed(id);
     }
 
 }
