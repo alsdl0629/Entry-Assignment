@@ -1,10 +1,12 @@
 package com.example.knowledgeboard.entity.board;
 
 import com.example.knowledgeboard.entity.BaseTimeEntity;
+import com.example.knowledgeboard.entity.like.Like;
 import com.example.knowledgeboard.entity.user.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -28,8 +30,8 @@ public class Board extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-    public void update(String title, String content) {
+    
+    public void updateFeed(String title, String content) {
         this.title = title;
         this.content = content;
     }

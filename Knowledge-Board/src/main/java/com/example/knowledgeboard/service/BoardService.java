@@ -41,6 +41,22 @@ public class BoardService {
     }
 
 
+    public MessageResponse updateFeed(Integer feedId, UpdateFeedRequest request) {
+
+        Board board = boardRepository.findById(feedId)
+                .orElseThrow(() -> FeedNotFoundException.EXCEPTION);
+
+        checkUser(board);
+
+        board.updateFeed(request.getTitle(), request.getContent());
+        boardRepository.save(board);
+
+        return MessageResponse.builder()
+                .message("Board : " + request.getTitle() + "을(를) 수정했습니다.")
+                .build();
+    }
+
+
     private void checkUser(Board board) {
         User user = userFacade.getUser();
 
