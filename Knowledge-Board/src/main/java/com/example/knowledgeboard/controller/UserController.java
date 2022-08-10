@@ -1,7 +1,7 @@
 package com.example.knowledgeboard.controller;
 
 import com.example.knowledgeboard.dto.MessageResponse;
-import com.example.knowledgeboard.dto.auth.request.SignupRequest;
+import com.example.knowledgeboard.dto.user.request.SignupRequest;
 import com.example.knowledgeboard.dto.user.response.MyPageResponse;
 import com.example.knowledgeboard.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +21,11 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public MessageResponse signup(@Valid @RequestBody SignupRequest request) {
         return userService.signup(request);
+    }
+
+    @GetMapping("/my-page")
+    public MyPageResponse getMyPage() {
+        return userService.getMyPage();
     }
 
 }

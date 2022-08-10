@@ -1,7 +1,9 @@
 package com.example.knowledgeboard.service;
 
 import com.example.knowledgeboard.dto.MessageResponse;
-import com.example.knowledgeboard.dto.auth.request.SignupRequest;
+import com.example.knowledgeboard.dto.user.request.SignupRequest;
+import com.example.knowledgeboard.dto.board.response.AllFeedsResponse;
+import com.example.knowledgeboard.dto.user.response.MyPageResponse;
 import com.example.knowledgeboard.entity.board.BoardRepository;
 import com.example.knowledgeboard.entity.user.Authority;
 import com.example.knowledgeboard.entity.user.User;
@@ -12,13 +14,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
     private final BoardRepository boardRepository;
     private final UserFacade userFacade;
@@ -38,6 +42,26 @@ public class UserService {
 
         return MessageResponse.builder()
                 .message(request.getAccountId() + "님 회원가입 성공")
+                .build();
+    }
+
+    public MyPageResponse getMyPage() {
+
+        User user = userFacade.getUser();
+
+        List<AllFeedsResponse> myFeeds = user.getBoards()
+                .stream().map(board -> AllFeedsResponse.builder()
+                        .title(board.getTitle())
+                        .createdAt(board.getUpdatedAt())
+                        .updatedAt(board.getUpdatedAt())
+                        .views(board.getViews())
+                        .writer(board.getUser().getAccountId())
+                        .build())
+                .collect(Collectors.toList());
+
+        return MyPageResponse.builder()
+                .accountId(user.getAccountId())
+                .myFeeds(myFeeds)
                 .build();
     }
 

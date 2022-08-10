@@ -1,4 +1,4 @@
-package com.example.knowledgeboard.dto.auth.request;
+package com.example.knowledgeboard.dto.user.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
