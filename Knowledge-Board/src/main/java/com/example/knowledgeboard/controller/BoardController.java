@@ -31,4 +31,9 @@ public class BoardController {
         return boardService.updateFeed(id, request);
     }
 
+    @DeleteMapping("/{feed_id}")
+    public MessageResponse deleteFeed(@PathVariable(name = "feed_id") Integer id) {
+        return boardService.deleteFeed(id);
+    }
+
 }

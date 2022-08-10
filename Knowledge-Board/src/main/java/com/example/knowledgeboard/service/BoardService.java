@@ -57,6 +57,19 @@ public class BoardService {
     }
 
 
+    public MessageResponse deleteFeed(Integer feedId) {
+
+        Board board = boardRepository.findById(feedId)
+                .orElseThrow(() -> FeedNotFoundException.EXCEPTION);
+
+        checkUser(board);
+
+        boardRepository.delete(board);
+
+        return new MessageResponse("Board : " + board.getTitle() + "을(를) 삭제했습니다.");
+    }
+
+
     private void checkUser(Board board) {
         User user = userFacade.getUser();
 
