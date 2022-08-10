@@ -3,7 +3,8 @@ package com.example.knowledgeboard.controller;
 import com.example.knowledgeboard.dto.MessageResponse;
 import com.example.knowledgeboard.dto.board.request.CreateFeedRequest;
 import com.example.knowledgeboard.dto.board.request.UpdateFeedRequest;
-import com.example.knowledgeboard.dto.board.response.BoardResponse;
+import com.example.knowledgeboard.dto.board.response.AllFeedsResponse;
+import com.example.knowledgeboard.dto.board.response.DetailedFeedResponse;
 import com.example.knowledgeboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/feed")
+@RequestMapping("/feeds")
 @RestController
 public class BoardController {
 
@@ -34,6 +35,11 @@ public class BoardController {
     @DeleteMapping("/{feed_id}")
     public MessageResponse deleteFeed(@PathVariable(name = "feed_id") Integer id) {
         return boardService.deleteFeed(id);
+    }
+
+    @GetMapping("/list")
+    public List<AllFeedsResponse> getAllFeed() {
+        return boardService.getAllFeed();
     }
 
 }

@@ -3,7 +3,8 @@ package com.example.knowledgeboard.service;
 import com.example.knowledgeboard.dto.MessageResponse;
 import com.example.knowledgeboard.dto.board.request.CreateFeedRequest;
 import com.example.knowledgeboard.dto.board.request.UpdateFeedRequest;
-import com.example.knowledgeboard.dto.board.response.BoardResponse;
+import com.example.knowledgeboard.dto.board.response.AllFeedsResponse;
+import com.example.knowledgeboard.dto.board.response.DetailedFeedResponse;
 import com.example.knowledgeboard.entity.board.Board;
 import com.example.knowledgeboard.entity.board.BoardRepository;
 import com.example.knowledgeboard.entity.user.User;
@@ -76,6 +77,19 @@ public class BoardService {
         if (!board.getUser().equals(user)) {
             throw ForbiddenException.EXCEPTION;
         }
+    }
+
+    public List<AllFeedsResponse> getAllFeed() {
+
+        return boardRepository.findAll()
+                .stream().map(board -> AllFeedsResponse.builder()
+                        .title(board.getTitle())
+                        .createdAt(board.getUpdatedAt())
+                        .updatedAt(board.getUpdatedAt())
+                        .views(board.getViews())
+                        .writer(board.getUser().getAccountId())
+                        .build())
+                .collect(Collectors.toList());
     }
 
 }
