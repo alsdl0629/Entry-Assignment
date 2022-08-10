@@ -17,7 +17,7 @@ public enum ErrorCode {
     AUTHENTICATION_NOT_FOUND(404, "Authentication Not Found"),
     USER_ALREADY_EXISTS(409, "User Already Exists"),
 
-    BOARD_NOT_FOUND(404, "Board Not Found");
+    FEED_NOT_FOUND(404, "Feed Not Found");
 
 
     private final int status;
