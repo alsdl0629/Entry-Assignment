@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 @Builder
 public class AllFeedsResponse {
 
+    private String writer;
+
     private String title;
 
     private LocalDateTime createdAt;
 
-    private LocalDateTime updatedAt;
-
     private Integer views;
 
-    private String writer;
+    private Integer likeCounts;
 
 }

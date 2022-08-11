@@ -3,11 +3,11 @@ package com.example.knowledgeboard.service;
 import com.example.knowledgeboard.dto.user.request.SignupRequest;
 import com.example.knowledgeboard.dto.board.response.AllFeedsResponse;
 import com.example.knowledgeboard.dto.user.response.MyPageResponse;
-import com.example.knowledgeboard.entity.board.BoardRepository;
 import com.example.knowledgeboard.entity.user.Authority;
 import com.example.knowledgeboard.entity.user.User;
 import com.example.knowledgeboard.entity.user.UserRepository;
 import com.example.knowledgeboard.exception.UserAlreadyExistsException;
+import com.example.knowledgeboard.facade.LikeFacade;
 import com.example.knowledgeboard.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final LikeFacade likeFacade;
     private final PasswordEncoder passwordEncoder;
-    private final BoardRepository boardRepository;
     private final UserFacade userFacade;
 
     public void signup(SignupRequest request) {
@@ -33,8 +33,9 @@ public class UserService {
         }
 
         userRepository.save(User.builder()
-                .accountId(request.getAccountId())
                 .name(request.getName())
+                .accountId(request.getAccountId())
+                .introduction(request.getIntroduction())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .authority(Authority.ROLE_USER)
                 .build());
@@ -50,11 +51,13 @@ public class UserService {
                         .title(board.getTitle())
                         .createdAt(board.getCreatedAt())
                         .views(board.getViews())
+                        .likeCounts(board.getLikeCounts())
                         .build())
                 .collect(Collectors.toList());
 
         return MyPageResponse.builder()
                 .accountId(user.getAccountId())
+                .introduction(user.getIntroduction())
                 .myFeeds(myFeeds)
                 .build();
     }

@@ -12,6 +12,8 @@ public class MyPageResponse {
 
     private String accountId;
 
+    private String introduction;
+
     private List<AllFeedsResponse> myFeeds;
 
 }
