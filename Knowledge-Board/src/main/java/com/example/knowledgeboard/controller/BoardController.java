@@ -1,6 +1,5 @@
 package com.example.knowledgeboard.controller;
 
-import com.example.knowledgeboard.dto.MessageResponse;
 import com.example.knowledgeboard.dto.board.request.CreateFeedRequest;
 import com.example.knowledgeboard.dto.board.request.UpdateFeedRequest;
 import com.example.knowledgeboard.dto.board.response.AllFeedsResponse;
@@ -20,21 +19,23 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponse createFeed(@Valid @RequestBody CreateFeedRequest request) {
-        return boardService.createFeed(request);
+    @PostMapping
+    public void createFeed(@Valid @RequestBody CreateFeedRequest request) {
+        boardService.createFeed(request);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping("/{feed_id}")
-    public MessageResponse updateFeed(@PathVariable(name = "feed_id") Integer id,
+    public void updateFeed(@PathVariable(name = "feed_id") Integer id,
                                       @Valid @RequestBody UpdateFeedRequest request) {
-        return boardService.updateFeed(id, request);
+        boardService.updateFeed(id, request);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{feed_id}")
-    public MessageResponse deleteFeed(@PathVariable(name = "feed_id") Integer id) {
-        return boardService.deleteFeed(id);
+    public void deleteFeed(@PathVariable(name = "feed_id") Integer id) {
+        boardService.deleteFeed(id);
     }
 
     @GetMapping

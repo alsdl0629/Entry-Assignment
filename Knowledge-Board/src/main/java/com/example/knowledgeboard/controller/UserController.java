@@ -1,6 +1,5 @@
 package com.example.knowledgeboard.controller;
 
-import com.example.knowledgeboard.dto.MessageResponse;
 import com.example.knowledgeboard.dto.user.request.SignupRequest;
 import com.example.knowledgeboard.dto.user.response.MyPageResponse;
 import com.example.knowledgeboard.service.UserService;
@@ -17,10 +16,11 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/signup")
+
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponse signup(@Valid @RequestBody SignupRequest request) {
-        return userService.signup(request);
+    @PostMapping("/signup")
+    public void signup(@Valid @RequestBody SignupRequest request) {
+        userService.signup(request);
     }
 
     @GetMapping("/my-page")
