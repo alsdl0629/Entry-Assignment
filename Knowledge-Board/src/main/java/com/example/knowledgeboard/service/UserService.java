@@ -1,6 +1,5 @@
 package com.example.knowledgeboard.service;
 
-import com.example.knowledgeboard.dto.MessageResponse;
 import com.example.knowledgeboard.dto.user.request.SignupRequest;
 import com.example.knowledgeboard.dto.board.response.AllFeedsResponse;
 import com.example.knowledgeboard.dto.user.response.MyPageResponse;
@@ -27,7 +26,7 @@ public class UserService {
     private final BoardRepository boardRepository;
     private final UserFacade userFacade;
 
-    public MessageResponse signup(SignupRequest request) {
+    public void signup(SignupRequest request) {
 
         if(userRepository.existsByAccountId(request.getAccountId())) {
             throw UserAlreadyExistsException.EXCEPTION;
@@ -39,10 +38,6 @@ public class UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .authority(Authority.ROLE_USER)
                 .build());
-
-        return MessageResponse.builder()
-                .message(request.getAccountId() + "님 회원가입 성공")
-                .build();
     }
 
     public MyPageResponse getMyPage() {
@@ -51,11 +46,10 @@ public class UserService {
 
         List<AllFeedsResponse> myFeeds = user.getBoards()
                 .stream().map(board -> AllFeedsResponse.builder()
-                        .title(board.getTitle())
-                        .createdAt(board.getUpdatedAt())
-                        .updatedAt(board.getUpdatedAt())
-                        .views(board.getViews())
                         .writer(board.getUser().getAccountId())
+                        .title(board.getTitle())
+                        .createdAt(board.getCreatedAt())
+                        .views(board.getViews())
                         .build())
                 .collect(Collectors.toList());
 
