@@ -1,10 +1,10 @@
 package com.example.knowledgeboard.domain.user.service;
 
 import com.example.knowledgeboard.domain.user.api.dto.request.SignupRequest;
-import com.example.knowledgeboard.domain.board.api.dto.response.AllFeedsResponse;
 import com.example.knowledgeboard.domain.user.api.dto.response.MyPageResponse;
 import com.example.knowledgeboard.domain.user.entity.Authority;
 import com.example.knowledgeboard.domain.user.entity.User;
+import com.example.knowledgeboard.domain.user.exception.UserNotFoundException;
 import com.example.knowledgeboard.domain.user.repository.UserRepository;
 import com.example.knowledgeboard.domain.user.exception.UserAlreadyExistsException;
 import com.example.knowledgeboard.domain.like.facade.LikeFacade;
@@ -12,9 +12,6 @@ import com.example.knowledgeboard.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -45,21 +42,15 @@ public class UserService {
 
         User user = userFacade.getUser();
 
-        List<AllFeedsResponse> myFeeds = user.getBoards()
-                .stream().map(board -> AllFeedsResponse.builder()
-                        .writer(board.getUser().getAccountId())
-                        .title(board.getTitle())
-                        .createdAt(board.getCreatedAt())
-                        .views(board.getViews())
-                        .likeCounts(board.getLikeCounts())
-                        .build())
-                .collect(Collectors.toList());
-
-        return MyPageResponse.builder()
-                .accountId(user.getAccountId())
-                .introduction(user.getIntroduction())
-                .myFeeds(myFeeds)
-                .build();
+        return userFacade.getUserFeeds(user);
     }
 
+
+    public MyPageResponse getUserPage(Integer id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        return userFacade.getUserFeeds(user);
+    }
 }
