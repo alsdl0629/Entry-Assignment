@@ -3,12 +3,12 @@ package com.example.knowledgeboard.exception;
 import com.example.knowledgeboard.error.BusinessException;
 import com.example.knowledgeboard.error.ErrorCode;
 
-public class ForbiddenException extends BusinessException {
+public class UserForbiddenException extends BusinessException {
 
     public static BusinessException EXCEPTION =
-            new ForbiddenException();
+            new UserForbiddenException();
 
-    private ForbiddenException() {
-        super(ErrorCode.FORBIDDEN);
+    private UserForbiddenException() {
+        super(ErrorCode.USER_FORBIDDEN);
     }
 }
