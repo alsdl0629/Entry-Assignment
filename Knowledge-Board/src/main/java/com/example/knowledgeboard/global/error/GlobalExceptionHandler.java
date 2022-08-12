@@ -1,8 +1,5 @@
 package com.example.knowledgeboard.global.error;
 
-import com.example.knowledgeboard.global.error.BusinessException;
-import com.example.knowledgeboard.global.error.ErrorCode;
-import com.example.knowledgeboard.global.error.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
