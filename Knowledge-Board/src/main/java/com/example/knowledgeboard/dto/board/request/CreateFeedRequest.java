@@ -15,7 +15,6 @@ public class CreateFeedRequest {
     private String title;
 
     @NotBlank(message = "content는 필수 항목입니다.")
-    @Size(max = 500, message = "content는 500글자 이하여야 합니다.")
     private String content;
 
 }
