@@ -1,5 +1,7 @@
 package com.example.knowledgeboard.domain.user.facade;
 
+import com.example.knowledgeboard.domain.board.api.dto.response.AllFeedsResponse;
+import com.example.knowledgeboard.domain.user.api.dto.response.MyPageResponse;
 import com.example.knowledgeboard.domain.user.entity.User;
 import com.example.knowledgeboard.domain.user.repository.UserRepository;
 import com.example.knowledgeboard.domain.user.exception.AuthenticationNotFoundException;
@@ -9,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -26,6 +31,25 @@ public class UserFacade {
 
         return userRepository.findByAccountId(((AuthDetails) principal).getUsername())
                 .orElseThrow(()->UserNotFoundException.EXCEPTION);
+    }
+
+    public MyPageResponse getUserFeeds(User user) {
+
+        List<AllFeedsResponse> myFeeds = user.getBoards()
+                .stream().map(board -> AllFeedsResponse.builder()
+                        .writer(board.getUser().getAccountId())
+                        .title(board.getTitle())
+                        .createdAt(board.getCreatedAt())
+                        .views(board.getViews())
+                        .likeCounts(board.getLikeCounts())
+                        .build())
+                .collect(Collectors.toList());
+
+        return MyPageResponse.builder()
+                .accountId(user.getAccountId())
+                .introduction(user.getIntroduction())
+                .myFeeds(myFeeds)
+                .build();
     }
 
 }
