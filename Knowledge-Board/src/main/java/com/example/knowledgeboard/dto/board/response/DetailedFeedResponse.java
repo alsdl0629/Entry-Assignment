@@ -11,16 +11,18 @@ public class DetailedFeedResponse {
 
     private Integer boardId;
 
+    private String writer;
+
     private String title;
 
     private String content;
 
     private LocalDateTime createdAt;
 
-    private LocalDateTime updatedAt;
-
     private Integer views;
 
-    private String writer;
+    private boolean liked;
+
+    private Integer likeCounts;
 
 }
