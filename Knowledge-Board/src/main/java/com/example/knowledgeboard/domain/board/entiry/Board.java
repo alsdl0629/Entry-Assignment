@@ -1,6 +1,6 @@
 package com.example.knowledgeboard.domain.board.entiry;
 
-import com.example.knowledgeboard.entity.comment.Comment;
+import com.example.knowledgeboard.domain.user.entity.entiry.Comment;
 import com.example.knowledgeboard.domain.like.entiry.Like;
 import com.example.knowledgeboard.domain.user.entity.User;
 import lombok.*;
