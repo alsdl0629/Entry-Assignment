@@ -1,6 +1,6 @@
 package com.example.knowledgeboard.domain.board.api.dto.response;
 
-import com.example.knowledgeboard.dto.comment.response.CommentResponse;
+import com.example.knowledgeboard.domain.comment.api.dto.response.CommentResponse;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -12,6 +12,8 @@ import java.util.List;
 public class DetailedFeedResponse {
 
     private Integer boardId;
+
+    private Integer userId;
 
     private String writer;
 
@@ -26,5 +28,9 @@ public class DetailedFeedResponse {
     private boolean liked;
 
     private Integer likeCounts;
+
+    private Integer commentCounts;
+
+    private List<CommentResponse> comments;
 
 }

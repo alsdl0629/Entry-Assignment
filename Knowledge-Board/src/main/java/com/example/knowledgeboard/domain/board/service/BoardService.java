@@ -6,6 +6,7 @@ import com.example.knowledgeboard.domain.board.api.dto.response.AllFeedsResponse
 import com.example.knowledgeboard.domain.board.api.dto.response.DetailedFeedResponse;
 import com.example.knowledgeboard.domain.board.entiry.Board;
 import com.example.knowledgeboard.domain.board.repository.BoardRepository;
+import com.example.knowledgeboard.domain.comment.facade.CommentFacade;
 import com.example.knowledgeboard.domain.user.entity.User;
 import com.example.knowledgeboard.domain.board.exception.FeedNotFoundException;
 import com.example.knowledgeboard.domain.user.exception.UserForbiddenException;
@@ -28,6 +29,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final UserFacade userFacade;
     private final LikeFacade likeFacade;
+    private final CommentFacade commentFacade;
 
     public void createFeed(CreateFeedRequest request) {
 
@@ -80,6 +82,7 @@ public class BoardService {
                         .createdAt(board.getCreatedAt())
                         .views(board.getViews())
                         .likeCounts(board.getLikeCounts())
+                        .commentCounts(board.getComments().size())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -93,6 +96,7 @@ public class BoardService {
 
         return DetailedFeedResponse.builder()
                 .boardId(board.getId())
+                .userId(board.getUser().getId())
                 .writer(board.getUser().getAccountId())
                 .title(board.getTitle())
                 .content(board.getContent())
@@ -100,6 +104,8 @@ public class BoardService {
                 .views(board.getViews())
                 .liked(likeFacade.checkLiked(userFacade.getUser(), board))
                 .likeCounts(board.getLikeCounts())
+                .commentCounts(board.getComments().size())
+                .comments(commentFacade.getComments(board))
                 .build();
     }
 

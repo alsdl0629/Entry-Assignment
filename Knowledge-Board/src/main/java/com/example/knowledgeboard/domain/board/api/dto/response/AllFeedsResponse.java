@@ -19,4 +19,6 @@ public class AllFeedsResponse {
 
     private Integer likeCounts;
 
+    private Integer commentCounts;
+
 }
