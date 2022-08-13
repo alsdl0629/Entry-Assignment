@@ -1,5 +1,6 @@
 package com.example.knowledgeboard.global.error;
 
+import com.example.knowledgeboard.global.error.exception.BusinessException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.filter.OncePerRequestFilter;

@@ -1,5 +1,6 @@
-package com.example.knowledgeboard.global.error;
+package com.example.knowledgeboard.global.error.exception;
 
+import com.example.knowledgeboard.global.error.ErrorCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

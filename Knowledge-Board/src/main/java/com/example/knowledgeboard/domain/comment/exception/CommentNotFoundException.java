@@ -1,6 +1,6 @@
 package com.example.knowledgeboard.domain.comment.exception;
 
-import com.example.knowledgeboard.global.error.BusinessException;
+import com.example.knowledgeboard.global.error.exception.BusinessException;
 import com.example.knowledgeboard.global.error.ErrorCode;
 
 public class CommentNotFoundException extends BusinessException {
