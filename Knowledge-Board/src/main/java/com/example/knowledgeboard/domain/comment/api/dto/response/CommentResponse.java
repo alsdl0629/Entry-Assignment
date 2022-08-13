@@ -11,9 +11,9 @@ public class CommentResponse {
 
     private Integer commentId;
 
-    private Integer writerId;
+    private Integer userId;
 
-    private String accountId;
+    private String writer;
 
     private String content;
 
