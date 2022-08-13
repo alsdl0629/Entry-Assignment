@@ -3,7 +3,7 @@ package com.example.knowledgeboard.domain.board.api.dto.response;
 import com.example.knowledgeboard.domain.comment.api.dto.response.CommentResponse;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -21,7 +21,9 @@ public class DetailedFeedResponse {
 
     private String content;
 
-    private LocalDateTime createdAt;
+    private LocalDate createdDate;
+
+    private LocalDate updatedDate;
 
     private Integer views;
 

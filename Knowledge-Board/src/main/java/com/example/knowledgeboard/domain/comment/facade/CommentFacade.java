@@ -4,7 +4,7 @@ import com.example.knowledgeboard.domain.board.entiry.Board;
 import com.example.knowledgeboard.domain.comment.api.dto.response.CommentResponse;
 import com.example.knowledgeboard.domain.comment.exception.CommentNotFoundException;
 import com.example.knowledgeboard.domain.comment.repository.CommentRepository;
-import com.example.knowledgeboard.domain.user.entity.entiry.Comment;
+import com.example.knowledgeboard.domain.comment.entiry.Comment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class CommentFacade {
                         .userId(comment.getUser().getId())
                         .writer(comment.getUser().getAccountId())
                         .content(comment.getContent())
-                        .createdAt(comment.getCreatedAt())
+                        .createdDate(comment.getCreatedDate())
                         .build())
                 .collect(Collectors.toList());
     }

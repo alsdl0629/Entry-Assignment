@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +37,6 @@ public class BoardService {
         boardRepository.save(Board.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .createdAt(LocalDateTime.now())
                 .views(0)
                 .likeCounts(0)
                 .user(user)
@@ -79,7 +77,7 @@ public class BoardService {
                 .stream().map(board -> AllFeedsResponse.builder()
                         .writer(board.getUser().getAccountId())
                         .title(board.getTitle())
-                        .createdAt(board.getCreatedAt())
+                        .createdDate(board.getCreatedDate())
                         .views(board.getViews())
                         .likeCounts(board.getLikeCounts())
                         .commentCounts(board.getComments().size())
@@ -100,7 +98,8 @@ public class BoardService {
                 .writer(board.getUser().getAccountId())
                 .title(board.getTitle())
                 .content(board.getContent())
-                .createdAt(board.getCreatedAt())
+                .createdDate(board.getCreatedDate())
+                .updatedDate(board.getUpdatedDate())
                 .views(board.getViews())
                 .liked(likeFacade.checkLiked(userFacade.getUser(), board))
                 .likeCounts(board.getLikeCounts())

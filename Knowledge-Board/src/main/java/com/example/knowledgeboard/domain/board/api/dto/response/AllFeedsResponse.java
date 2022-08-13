@@ -2,7 +2,7 @@ package com.example.knowledgeboard.domain.board.api.dto.response;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
@@ -13,7 +13,7 @@ public class AllFeedsResponse {
 
     private String title;
 
-    private LocalDateTime createdAt;
+    private LocalDate createdDate;
 
     private Integer views;
 

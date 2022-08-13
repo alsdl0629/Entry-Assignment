@@ -39,7 +39,7 @@ public class UserFacade {
                 .stream().map(board -> AllFeedsResponse.builder()
                         .writer(board.getUser().getAccountId())
                         .title(board.getTitle())
-                        .createdAt(board.getCreatedAt())
+                        .createdDate(board.getCreatedDate())
                         .views(board.getViews())
                         .likeCounts(board.getLikeCounts())
                         .build())

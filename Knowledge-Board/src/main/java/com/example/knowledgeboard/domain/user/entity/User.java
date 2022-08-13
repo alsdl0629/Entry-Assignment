@@ -1,7 +1,7 @@
 package com.example.knowledgeboard.domain.user.entity;
 
 import com.example.knowledgeboard.domain.board.entiry.Board;
-import com.example.knowledgeboard.domain.user.entity.entiry.Comment;
+import com.example.knowledgeboard.domain.comment.entiry.Comment;
 import com.example.knowledgeboard.domain.like.entiry.Like;
 import lombok.*;
 

@@ -1,7 +1,8 @@
-package com.example.knowledgeboard.domain.user.entity.entiry;
+package com.example.knowledgeboard.domain.comment.entiry;
 
 import com.example.knowledgeboard.domain.board.entiry.Board;
 import com.example.knowledgeboard.domain.user.entity.User;
+import com.example.knowledgeboard.global.entity.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Entity
-public class Comment {
+public class Comment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +21,6 @@ public class Comment {
 
     @Column(nullable = false)
     private String content;
-
-    @Column(nullable = false)
-    private LocalDate createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -34,7 +32,6 @@ public class Comment {
 
     public void updateComment(String content) {
         this.content = content;
-        this.createdAt = LocalDate.now();
     }
 
 }

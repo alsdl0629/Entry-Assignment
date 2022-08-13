@@ -1,12 +1,12 @@
 package com.example.knowledgeboard.domain.board.entiry;
 
-import com.example.knowledgeboard.domain.user.entity.entiry.Comment;
+import com.example.knowledgeboard.domain.comment.entiry.Comment;
 import com.example.knowledgeboard.domain.like.entiry.Like;
 import com.example.knowledgeboard.domain.user.entity.User;
+import com.example.knowledgeboard.global.entity.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Entity
-public class Board {
+public class Board extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +25,6 @@ public class Board {
 
     @Column(nullable = false)
     private String content;
-
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
 
     @Column(nullable = false)
     private Integer views;
@@ -47,7 +44,6 @@ public class Board {
     public void updateFeed(String title, String content) {
         this.title = title;
         this.content = content;
-        this.createdAt = LocalDateTime.now();
     }
 
     public void addViews() {
