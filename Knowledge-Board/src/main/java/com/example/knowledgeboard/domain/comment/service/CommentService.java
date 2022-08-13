@@ -42,4 +42,21 @@ public class CommentService {
                 .build());
     }
 
+    public void updateComment(Integer commentId, UpdateCommentRequest request) {
+
+        Comment comment = commentFacade.getByCommentId(commentId);
+        checkUser(comment);
+
+        comment.updateComment(request.getContent());
+    }
+
+    private void checkUser(Comment comment) {
+        User user = userFacade.getUser();
+
+        if(!comment.getUser().equals(user)) {
+            throw UserForbiddenException.EXCEPTION;
+        }
+    }
+
+
 }

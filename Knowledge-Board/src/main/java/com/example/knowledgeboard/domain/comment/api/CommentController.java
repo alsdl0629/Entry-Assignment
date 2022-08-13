@@ -22,5 +22,12 @@ public class CommentController {
                            @Valid @RequestBody CreateCommentRequest request) {
         commentService.addComment(id, request);
     }
-    
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("/{comment-id}/comment")
+    public void updateComment(@PathVariable("comment-id") Integer id,
+                              @Valid @RequestBody UpdateCommentRequest request) {
+        commentService.updateComment(id, request);
+    }
+
 }
