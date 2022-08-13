@@ -30,4 +30,10 @@ public class CommentController {
         commentService.updateComment(id, request);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{comment-id}/comment")
+    public void removeComment(@PathVariable("comment-id") Integer id) {
+        commentService.removeComment(id);
+    }
+
 }

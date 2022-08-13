@@ -50,6 +50,14 @@ public class CommentService {
         comment.updateComment(request.getContent());
     }
 
+    public void removeComment(Integer commentId) {
+
+        Comment comment = commentFacade.getByCommentId(commentId);
+        checkUser(comment);
+
+        commentRepository.delete(comment);
+    }
+
     private void checkUser(Comment comment) {
         User user = userFacade.getUser();
 
