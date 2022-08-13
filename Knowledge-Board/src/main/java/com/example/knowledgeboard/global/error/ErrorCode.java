@@ -11,6 +11,7 @@ public enum ErrorCode {
     INVALID_TOKEN(401, "Invalid Token"),
     EXPIRED_TOKEN(401, "Expired_Token"),
     INVALID_PASSWORD(401, "Invalid Password"),
+    REFRESH_TOKEN_NOT_FOUND(404, "Refresh Token Not Found"),
 
     USER_FORBIDDEN(403, "User Forbidden"),
     USER_NOT_FOUND(404, "User Not Found"),
