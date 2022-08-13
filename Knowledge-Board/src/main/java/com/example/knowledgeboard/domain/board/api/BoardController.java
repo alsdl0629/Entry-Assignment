@@ -26,15 +26,15 @@ public class BoardController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping("/{feed_id}")
-    public void updateFeed(@PathVariable(name = "feed_id") Integer id,
+    @PatchMapping("/{feed-id}")
+    public void updateFeed(@PathVariable(name = "feed-id") Integer id,
                                       @Valid @RequestBody UpdateFeedRequest request) {
         boardService.updateFeed(id, request);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{feed_id}")
-    public void deleteFeed(@PathVariable(name = "feed_id") Integer id) {
+    @DeleteMapping("/{feed-id}")
+    public void deleteFeed(@PathVariable(name = "feed-id") Integer id) {
         boardService.deleteFeed(id);
     }
 
@@ -43,8 +43,8 @@ public class BoardController {
         return boardService.getAllFeed();
     }
 
-    @GetMapping("/{feed_id}")
-    public DetailedFeedResponse getOneFeed(@PathVariable(name = "feed_id") Integer id) {
+    @GetMapping("/{feed-id}")
+    public DetailedFeedResponse getOneFeed(@PathVariable(name = "feed-id") Integer id) {
         return boardService.getOneFeed(id);
     }
 

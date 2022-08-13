@@ -11,8 +11,8 @@ public class LikeController {
 
     private final LikeService likeService;
 
-    @PutMapping("/feeds/{feed_id}/like")
-    public LikeResponse liked(@PathVariable("feed_id") Integer id) {
+    @PutMapping("/feeds/{feed-id}/like")
+    public LikeResponse liked(@PathVariable("feed-id") Integer id) {
         return likeService.liked(id);
     }
 

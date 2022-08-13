@@ -28,8 +28,8 @@ public class UserController {
         return userService.getMyPage();
     }
 
-    @GetMapping("/{user_id}")
-    public MyPageResponse getUserPage(@PathVariable("user_id") Integer id) {
+    @GetMapping("/{user-id}")
+    public MyPageResponse getUserPage(@PathVariable("user-id") Integer id) {
         return userService.getUserPage(id);
     }
 
