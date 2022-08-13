@@ -1,10 +1,10 @@
 package com.example.knowledgeboard.global.error;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @AllArgsConstructor
+@Builder
 public class ErrorResponse {
 
     private int status;
