@@ -12,6 +12,7 @@ import com.example.knowledgeboard.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserFacade userFacade;
 
+    @Transactional
     public void signup(SignupRequest request) {
 
         if(userRepository.existsByAccountId(request.getAccountId())) {
@@ -38,6 +40,7 @@ public class UserService {
                 .build());
     }
 
+    @Transactional(readOnly = true)
     public MyPageResponse getMyPage() {
 
         User user = userFacade.getUser();
@@ -45,7 +48,7 @@ public class UserService {
         return userFacade.getUserFeeds(user);
     }
 
-
+    @Transactional(readOnly = true)
     public MyPageResponse getUserPage(Integer id) {
 
         User user = userRepository.findById(id)

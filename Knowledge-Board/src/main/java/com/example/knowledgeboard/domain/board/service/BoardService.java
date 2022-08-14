@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
-@Transactional
 @Service
 public class BoardService {
 
@@ -30,6 +29,7 @@ public class BoardService {
     private final LikeFacade likeFacade;
     private final CommentFacade commentFacade;
 
+    @Transactional
     public void createFeed(CreateFeedRequest request) {
 
         User user = userFacade.getUser();
@@ -43,6 +43,7 @@ public class BoardService {
                 .build());
     }
 
+    @Transactional
     public void updateFeed(Integer feedId, UpdateFeedRequest request) {
 
         Board board = boardRepository.findById(feedId)
@@ -53,6 +54,7 @@ public class BoardService {
         board.updateFeed(request.getTitle(), request.getContent());
     }
 
+    @Transactional
     public void deleteFeed(Integer feedId) {
 
         Board board = boardRepository.findById(feedId)
@@ -71,6 +73,7 @@ public class BoardService {
         }
     }
 
+    @Transactional(readOnly = true)
     public List<AllFeedsResponse> getAllFeed() {
 
         return boardRepository.findAll()
@@ -85,6 +88,7 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public DetailedFeedResponse getOneFeed(Integer feedId) {
 
         Board board = boardRepository.findById(feedId)

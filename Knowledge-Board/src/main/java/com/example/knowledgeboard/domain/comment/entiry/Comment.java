@@ -7,6 +7,7 @@ import com.example.knowledgeboard.global.entity.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -33,7 +34,7 @@ public class Comment extends BaseTimeEntity {
 
     @OrderBy("id desc")
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
-    private List<Reply> replies;
+    private List<Reply> replies = new ArrayList<>();
 
     public void updateComment(String content) {
         this.content = content;

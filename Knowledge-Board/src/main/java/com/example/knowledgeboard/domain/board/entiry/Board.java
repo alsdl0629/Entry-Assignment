@@ -7,6 +7,7 @@ import com.example.knowledgeboard.global.entity.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -29,6 +30,7 @@ public class Board extends BaseTimeEntity {
     @Column(nullable = false)
     private Integer views;
 
+    @Column(nullable = false)
     private Integer likeCounts;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,11 +38,11 @@ public class Board extends BaseTimeEntity {
     private User user;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
-    private List<Like> likes;
+    private List<Like> likes = new ArrayList<>();
 
     @OrderBy("id desc")
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     public void updateFeed(String title, String content) {
         this.title = title;

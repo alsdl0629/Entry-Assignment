@@ -6,6 +6,7 @@ import com.example.knowledgeboard.domain.like.entiry.Like;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -31,16 +32,17 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
     @OneToMany(mappedBy = "user")
-    private List<Board> boards;
+    private List<Board> boards = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Like> likes;
+    private List<Like> likes = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
 }
