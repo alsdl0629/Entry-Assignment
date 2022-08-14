@@ -37,7 +37,7 @@ public class UserFacade {
 
         List<AllFeedsResponse> myFeeds = user.getBoards()
                 .stream().map(board -> AllFeedsResponse.builder()
-                        .writer(board.getUser().getAccountId())
+                        .feedWriter(board.getUser().getAccountId())
                         .title(board.getTitle())
                         .createdDate(board.getCreatedDate())
                         .views(board.getViews())

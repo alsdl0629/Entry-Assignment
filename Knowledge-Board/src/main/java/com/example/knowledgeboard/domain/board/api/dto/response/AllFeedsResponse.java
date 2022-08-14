@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Builder
 public class AllFeedsResponse {
 
-    private String writer;
+    private String feedWriter;
 
     private String title;
 

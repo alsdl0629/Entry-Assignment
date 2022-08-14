@@ -75,7 +75,7 @@ public class BoardService {
 
         return boardRepository.findAll()
                 .stream().map(board -> AllFeedsResponse.builder()
-                        .writer(board.getUser().getAccountId())
+                        .feedWriter(board.getUser().getAccountId())
                         .title(board.getTitle())
                         .createdDate(board.getCreatedDate())
                         .views(board.getViews())
@@ -95,7 +95,7 @@ public class BoardService {
         return DetailedFeedResponse.builder()
                 .boardId(board.getId())
                 .userId(board.getUser().getId())
-                .writer(board.getUser().getAccountId())
+                .feedWriter(board.getUser().getAccountId())
                 .title(board.getTitle())
                 .content(board.getContent())
                 .createdDate(board.getCreatedDate())

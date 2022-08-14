@@ -15,7 +15,7 @@ public class DetailedFeedResponse {
 
     private Integer userId;
 
-    private String writer;
+    private String feedWriter;
 
     private String title;
 

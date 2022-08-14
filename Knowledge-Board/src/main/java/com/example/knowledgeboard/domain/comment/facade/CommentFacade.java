@@ -5,6 +5,7 @@ import com.example.knowledgeboard.domain.comment.api.dto.response.CommentRespons
 import com.example.knowledgeboard.domain.comment.exception.CommentNotFoundException;
 import com.example.knowledgeboard.domain.comment.repository.CommentRepository;
 import com.example.knowledgeboard.domain.comment.entiry.Comment;
+import com.example.knowledgeboard.domain.reply.facade.ReplyFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 public class CommentFacade {
 
     private final CommentRepository commentRepository;
+    private final ReplyFacade replyFacade;
 
     public List<CommentResponse> getComments(Board board) {
 
@@ -23,9 +25,11 @@ public class CommentFacade {
                 .stream().map(comment -> CommentResponse.builder()
                         .commentId(comment.getId())
                         .userId(comment.getUser().getId())
-                        .writer(comment.getUser().getAccountId())
+                        .commentWriter(comment.getUser().getAccountId())
                         .content(comment.getContent())
                         .createdDate(comment.getCreatedDate())
+                        .replyCounts(comment.getReplies().size())
+                        .replies(replyFacade.getReplies(comment))
                         .build())
                 .collect(Collectors.toList());
     }
