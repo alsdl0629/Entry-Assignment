@@ -20,4 +20,9 @@ public class AuthController {
         return authService.login(request);
     }
 
+    @PutMapping("/reissue")
+    public TokenResponse reissue(@RequestHeader("Refresh-Token") String refresh) {
+        return authService.reissue(refresh);
+    }
+
 }
