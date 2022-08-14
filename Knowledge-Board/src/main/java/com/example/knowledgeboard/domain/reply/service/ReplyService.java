@@ -45,6 +45,14 @@ public class ReplyService {
         reply.updateReply(request.getContent());
     }
 
+    public void removeReply(Integer replyId) {
+
+        Reply reply = replyFacade.getByReplyId(replyId);
+        checkUser(reply);
+
+        replyRepository.delete(reply);
+    }
+
     private void checkUser(Reply reply) {
         User user = userFacade.getUser();
 

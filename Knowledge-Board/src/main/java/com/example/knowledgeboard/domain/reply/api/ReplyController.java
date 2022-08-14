@@ -30,4 +30,10 @@ public class ReplyController {
         replyService.updateReply(id, request);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{reply-id}/reply")
+    public void removeReply(@PathVariable("reply-id") Integer id) {
+        replyService.removeReply(id);
+    }
+
 }
