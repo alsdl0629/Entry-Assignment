@@ -38,6 +38,7 @@ public class Board extends BaseTimeEntity {
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Like> likes;
 
+    @OrderBy("id desc")
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
