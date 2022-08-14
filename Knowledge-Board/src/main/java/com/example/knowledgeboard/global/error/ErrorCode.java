@@ -20,7 +20,9 @@ public enum ErrorCode {
 
     FEED_NOT_FOUND(404, "Feed Not Found"),
 
-    COMMENT_NOT_FOUND(404, "Comment Not Found");
+    COMMENT_NOT_FOUND(404, "Comment Not Found"),
+
+    REPLY_NOT_FOUND(404, "Reply Not Found");
 
 
     private final int status;
