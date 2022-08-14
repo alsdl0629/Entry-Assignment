@@ -1,20 +1,18 @@
-package com.example.knowledgeboard.domain.comment.entiry;
+package com.example.knowledgeboard.domain.reply.entiry;
 
-import com.example.knowledgeboard.domain.board.entiry.Board;
-import com.example.knowledgeboard.domain.reply.entiry.Reply;
+import com.example.knowledgeboard.domain.comment.entiry.Comment;
 import com.example.knowledgeboard.domain.user.entity.User;
 import com.example.knowledgeboard.global.entity.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Entity
-public class Comment extends BaseTimeEntity {
+public class Reply extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,14 +26,10 @@ public class Comment extends BaseTimeEntity {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id")
-    private Board board;
+    @JoinColumn(name = "comment_id")
+    private Comment comment;
 
-    @OrderBy("id desc")
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
-    private List<Reply> replies;
-
-    public void updateComment(String content) {
+    public void updateReply(String content) {
         this.content = content;
     }
 
