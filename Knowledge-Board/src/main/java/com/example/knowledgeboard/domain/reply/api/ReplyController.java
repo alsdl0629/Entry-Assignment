@@ -23,4 +23,11 @@ public class ReplyController {
         replyService.addReply(id, request);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("/{reply-id}/reply")
+    public void updateReply(@PathVariable("reply-id") Integer id,
+                            @Valid @RequestBody UpdateReplyRequest request) {
+        replyService.updateReply(id, request);
+    }
+
 }

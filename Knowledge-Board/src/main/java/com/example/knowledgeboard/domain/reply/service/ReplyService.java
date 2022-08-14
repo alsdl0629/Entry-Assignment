@@ -37,4 +37,20 @@ public class ReplyService {
                 .build());
     }
 
+    public void updateReply(Integer replyId, UpdateReplyRequest request) {
+
+        Reply reply = replyFacade.getByReplyId(replyId);
+        checkUser(reply);
+
+        reply.updateReply(request.getContent());
+    }
+
+    private void checkUser(Reply reply) {
+        User user = userFacade.getUser();
+
+        if(!reply.getUser().equals(user)) {
+            throw UserForbiddenException.EXCEPTION;
+        }
+    }
+
 }
